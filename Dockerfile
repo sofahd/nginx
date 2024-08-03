@@ -15,5 +15,12 @@ COPY nginx.conf /etc/nginx/sites-available/default.conf
 # Create a symbolic link to enable the configuration
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
+RUN openssl genpkey -algorithm RSA -out /etc/nginx/ssl/key.pem -aes256
+
+RUN openssl req -new -key /etc/nginx/ssl/key.pem -out /etc/nginx/ssl/cert.csr
+
+RUN openssl x509 -req -days 365 -in /etc/nginx/ssl/cert.csr -signkey /etc/nginx/ssl/key.pem -out /etc/nginx/ssl/cert.pem
+
+
 # Use the exec form of CMD to run Nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]
