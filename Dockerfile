@@ -36,6 +36,8 @@ RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/defau
 
 COPY cert_script.py /cert_script.py
 
+RUN mkdir /etc/nginx/ssl
+
 RUN python3 /cert_script.py ${CREATE_CERT} ${CN} ${OU} ${O} ${L} ${ST} ${C}
 
 # Use the exec form of CMD to run Nginx in the foreground

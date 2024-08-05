@@ -23,17 +23,17 @@ def create_ssl_certificate(CN:str="", OU:str="", O:str="", L:str="", ST:str="", 
         own_ip = get_own_ip()
         CN = own_ip
     
-    values = r"\CN=" + CN
+    values = "/CN=" + CN
     if OU != "":
-        values += r"\OU=" + OU
+        values += "/OU=" + OU
     if O != "":
-        values += r"\O=" + O
+        values += "/O=" + O
     if L != "":
-        values += r"\L=" + L
+        values += "/L=" + L
     if ST != "":
-        values += r"\ST=" + ST
+        values += "/ST=" + ST
     if C != "":
-        values += r"\C=" + C
+        values += "/C=" + C
     
     subprocess.run(f"openssl genpkey -algorithm RSA -out /etc/nginx/ssl/key.pem -aes256 -pass pass:your_password", shell=True)
     subprocess.run(f'openssl req -new -key /etc/nginx/ssl/key.pem -out /etc/nginx/ssl/cert.csr -passin pass:your_password -subj "{values}"', shell=True)
