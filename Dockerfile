@@ -37,9 +37,9 @@ COPY nginx.conf /etc/nginx/sites-available/default.conf
 # Create a symbolic link to enable the configuration
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
-COPY cert_script.py /cert_script.py ${CREATE_CERT} ${CN} ${OU} ${O} ${L} ${ST} ${C}
+COPY cert_script.py /cert_script.py
 
-RUN python3 /cert_script.py 
+RUN python3 /cert_script.py ${CREATE_CERT} ${CN} ${OU} ${O} ${L} ${ST} ${C}
 
 # Use the exec form of CMD to run Nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]
