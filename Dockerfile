@@ -21,11 +21,8 @@ RUN apt-get update && \
     apt-get install -y nginx-extras \
     python3 \
     python3-pip \
-    python3-dev && \
-    pip3 install setuptools \
-    requests \
-    subprocess \
-    argparse && \
+    python3-dev \
+    python3-requests && \
     rm -rf /var/lib/apt/lists/*
 
 # Remove the default Nginx configuration file
