@@ -35,9 +35,9 @@ def create_ssl_certificate(CN:str="", OU:str="", O:str="", L:str="", ST:str="", 
     if C != "":
         values += "/C=" + C
     
-    subprocess.run(f"openssl genpkey -algorithm RSA -out /etc/nginx/ssl/key.pem -aes256 -pass pass:your_password", shell=True)
-    subprocess.run(f'openssl req -new -key /etc/nginx/ssl/key.pem -out /etc/nginx/ssl/cert.csr -passin pass:your_password -subj "{values}"', shell=True)
-    subprocess.run(f"openssl x509 -req -days 365 -in /etc/nginx/ssl/cert.csr -signkey /etc/nginx/ssl/key.pem -out /etc/nginx/ssl/cert.pem -passin pass:your_password", shell=True)
+    subprocess.run(f"openssl genpkey -algorithm RSA -out /etc/nginx/ssl/key.pem", shell=True)
+    subprocess.run(f'openssl req -new -key /etc/nginx/ssl/key.pem -out /etc/nginx/ssl/cert.csr -subj "{values}"', shell=True)
+    subprocess.run(f"openssl x509 -req -days 365 -in /etc/nginx/ssl/cert.csr -signkey /etc/nginx/ssl/key.pem -out /etc/nginx/ssl/cert.pem", shell=True)
 
     return True
 
