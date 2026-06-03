@@ -1,0 +1,2 @@
+# Keeps the ssl/ directory present in the repo so `COPY ssl/` works on a standalone build.
+# At deploy time NginxHoneypot.download_repo drops the forged cert.pem/key.pem here.
